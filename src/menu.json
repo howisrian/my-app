@@ -1,0 +1,30 @@
+[
+    {
+      "date": "2024-05-02",
+      "lunch": [
+        "Arroz",
+        "Feijão",
+        "Frango Grelhado",
+        "Salada de Alface e Tomate"
+      ]
+    },
+    {
+      "date": "2024-05-03",
+      "lunch": [
+        "Macarrão",
+        "Molho de Tomate",
+        "Almôndega",
+        "Salada de Couve e Cenoura"
+      ]
+    },
+    {
+      "date": "2024-05-04",
+      "lunch": [
+        "Peixe Assado",
+        "Batata Cozida",
+        "Brócolis",
+        "Salada de Rúcula e Beterraba"
+      ]
+    }
+  ]
+  
