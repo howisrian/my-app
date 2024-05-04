@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native';
 import menuData from '../menu.json';
+import { Ionicons } from '@expo/vector-icons';
 
 const DailyMenuScreen = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [dailyMenu, setDailyMenu] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [animation] = useState(new Animated.Value(0));
 
   useEffect(() => {
     const formattedDate = currentDate.toISOString().split('T')[0];
@@ -35,15 +38,32 @@ const DailyMenuScreen = () => {
     return formatted;
   };
 
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+    Animated.timing(animation, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const fadeOut = () => {
+    Animated.timing(animation, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
-    <View style={[styles.container, { backgroundColor: '#3498db' }]}>
+    <View style={[styles.container, { backgroundColor: '#F4F4F4' }]}>
       <View style={styles.navBar}>
         <TouchableOpacity onPress={previousDay} style={styles.navButton}>
-          <Text style={styles.navText}>{'<'}</Text>
+          <Ionicons name="chevron-back-outline" size={24} color="#3066BE" />
         </TouchableOpacity>
         <Text style={styles.date}>{formattedDate(currentDate)}</Text>
         <TouchableOpacity onPress={nextDay} style={styles.navButton}>
-          <Text style={styles.navText}>{'>'}</Text>
+          <Ionicons name="chevron-forward-outline" size={24} color="#3066BE" />
         </TouchableOpacity>
       </View>
       <View style={styles.menuContainer}>
@@ -52,9 +72,18 @@ const DailyMenuScreen = () => {
           <Text style={styles.emptyText}>Nenhum cardápio disponível para esta data.</Text>
         ) : (
           dailyMenu.map((item, index) => (
-            <View key={index} style={styles.menuItemContainer}>
-              <Text style={styles.menuItem}>{item}</Text>
-            </View>
+            <TouchableOpacity key={index} onPress={() => handleItemClick(item)} style={styles.menuItemContainer}>
+              <Text style={styles.menuItem}>{item.name}</Text>
+              {selectedItem && selectedItem.name === item.name && (
+                <Animated.View style={[styles.descriptionContainer, { opacity: animation }]}>
+                  <Text style={styles.descriptionTitle}>Descrição:</Text>
+                  <Text style={styles.descriptionText}>{item.description}</Text>
+                  <TouchableOpacity onPress={fadeOut} style={styles.closeButton}>
+                    <Ionicons name="close-circle" size={24} color="#3066BE" />
+                  </TouchableOpacity>
+                </Animated.View>
+              )}
+            </TouchableOpacity>
           ))
         )}
       </View>
@@ -65,8 +94,6 @@ const DailyMenuScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
     paddingTop: 40,
     paddingHorizontal: 20,
   },
@@ -74,45 +101,59 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 20,
-    width: '100%',
+    alignItems: 'center',
   },
   navButton: {
-    backgroundColor: '#ffffff',
-    borderRadius: 50,
     padding: 10,
-  },
-  navText: {
-    fontSize: 24,
-    color: '#3498db',
   },
   date: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#3066BE',
   },
   menuContainer: {
     marginTop: 20,
-    width: '100%',
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#ffffff',
+    color: '#3066BE',
   },
   menuItemContainer: {
     backgroundColor: '#ffffff',
-    padding: 10,
-    borderRadius: 5,
+    padding: 15,
+    borderRadius: 10,
     marginBottom: 10,
+    elevation: 5,
   },
   menuItem: {
+    fontSize: 18,
+    color: '#3066BE',
+  },
+  descriptionContainer: {
+    backgroundColor: '#ffffff',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 10,
+    elevation: 5,
+  },
+  descriptionTitle: {
     fontSize: 16,
-    color: '#3498db',
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#3066BE',
+  },
+  descriptionText: {
+    fontSize: 14,
+    color: '#333333',
+  },
+  closeButton: {
+    alignSelf: 'flex-end',
   },
   emptyText: {
     fontSize: 16,
-    color: '#ffffff',
+    color: '#3066BE',
   },
 });
 

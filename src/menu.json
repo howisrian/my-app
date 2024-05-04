@@ -1,30 +1,23 @@
 [
-    {
-      "date": "2024-05-02",
-      "lunch": [
-        "Arroz",
-        "Feijão",
-        "Frango Grelhado",
-        "Salada de Alface e Tomate"
-      ]
-    },
-    {
-      "date": "2024-05-03",
-      "lunch": [
-        "Macarrão",
-        "Molho de Tomate",
-        "Almôndega",
-        "Salada de Couve e Cenoura"
-      ]
-    },
-    {
-      "date": "2024-05-04",
-      "lunch": [
-        "Peixe Assado",
-        "Batata Cozida",
-        "Brócolis",
-        "Salada de Rúcula e Beterraba"
-      ]
-    }
-  ]
-  
+  {
+    "date": "2024-05-05",
+    "lunch": [
+      { "name": "Feijoada", "description": "Deliciosa feijoada com arroz, farofa e laranja." },
+      { "name": "Strogonoff de Frango", "description": "Strogonoff cremoso de frango com batata palha." }
+    ]
+  },
+  {
+    "date": "2024-05-06",
+    "lunch": [
+      { "name": "Salmão Grelhado", "description": "Salmão grelhado com molho de ervas e legumes." },
+      { "name": "Bife à Parmegiana", "description": "Bife à milanesa coberto com queijo e molho de tomate." }
+    ]
+  },
+  {
+    "date": "2024-05-07",
+    "lunch": [
+      { "name": "Macarronada", "description": "Macarrão com molho de tomate, carne moída e queijo parmesão." },
+      { "name": "Peixe Assado", "description": "Peixe assado com batatas e legumes." }
+    ]
+  }
+]
