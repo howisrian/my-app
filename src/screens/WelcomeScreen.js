@@ -6,13 +6,20 @@ const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={[styles.container, { backgroundColor: '#ffffff' }]}>
       <Image source={require('../../assets/logo.gif')} style={styles.logo} />
-      <Text style={[styles.title, { color: '#3498db' }]}>Bem-vindo ao Xilo App!</Text>
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: '#3498db' }]}
-        onPress={() => navigation.navigate('Menu')}
-      >
-        <Text style={[styles.buttonText, { color: '#ffffff' }]}>Ver Cardápio do Dia</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#3498db' }]}
+          onPress={() => navigation.navigate('Menu')}
+        >
+          <Text style={[styles.buttonText, { color: '#ffffff' }]}>Ver Cardápio do Dia</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#3066be' }]} // Cor do botão de atualizar
+          onPress={() => navigation.navigate('UpdateMenu')} // Navega para a tela UpdateMenuScreen
+        >
+          <Text style={[styles.buttonText, { color: '#ffffff' }]}>Atualizar Cardápio</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -30,19 +37,19 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginBottom: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+  buttonContainer: {
+    marginTop: 20,
   },
   button: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
+    marginBottom: 10,
   },
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 }); 
 
